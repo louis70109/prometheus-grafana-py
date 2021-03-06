@@ -3,6 +3,7 @@
 # Prerequisite
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- Postgresql
 
 # Run it
 
@@ -32,6 +33,19 @@ You will see the command result of the following image.
 - Watch results.
 
 ![result](https://raw.githubusercontent.com/louis70109/prometheus-grafana-py/master/public/result.png)
+
+# Note
+
+## How to set up Postgresql in Grafana container.
+
+- [Environment variables rule](https://grafana.com/docs/grafana/latest/administration/configuration/#configure-with-environment-variables)
+    - Rule: `GF_<SectionName>_<KeyName>`
+- [Grafana database properties](https://grafana.com/docs/grafana/latest/administration/configuration/#database)
+- Run another `Postgresql container` in Docker.
+    - I use [Kitematic](https://github.com/docker/kitematic/releases) to assist me to install the container.
+    
+> Q: Why not use a database container?
+> A: Because we need to deploy on Heroku.
 
 # License
 

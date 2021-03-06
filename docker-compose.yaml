@@ -1,8 +1,7 @@
 version: '3.7'
 
-volumes:
-  prometheus_data: { }
-  grafana_data: { }
+#volumes:
+#  grafana_data: { }
 
 services:
   web:
@@ -14,17 +13,19 @@ services:
   prometheus:
     image: prom/prometheus:v2.1.0
     volumes:
-      - './prometheus.yml:/etc/prometheus/prometheus.yml'
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yaml
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--config.file=/etc/prometheus/prometheus.yaml'
     ports:
       - '9090:9090'
   grafana:
     image: grafana/grafana
-    volumes:
-      - grafana_data:/var/lib/grafana
+#    volumes:
+#      - grafana_data:/var/lib/grafana
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=pass
+      - GF_SECURITY_ADMIN_PASSWORD=password
+      - GF_DATABASE_TYPE=postgres
+      - GF_DATABASE_URL=postgres://USER:PASSWORD@IP:PORT/BATABASE
     depends_on:
       - prometheus
     ports:
